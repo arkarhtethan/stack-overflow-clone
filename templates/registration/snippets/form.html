@@ -1,0 +1,16 @@
+
+
+<form action="
+{% if action_url %}
+    {{action_url}}
+{% endif %}
+    " 
+    {% if file_upload %}
+        enctype="multipart/form-data"
+    {% endif %}
+        
+    method="POST">
+    {{ form }}
+    {% csrf_token %}
+    <input type="submit" class="btn btn-primary" value="{{btn_value}}">
+</form>

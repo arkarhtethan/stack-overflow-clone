@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h2>Create Account</h2>
+            {% include 'registration/snippets/form.html' with form=form btn_value="Sign Up"%}
+        </div>
+    </div>
+</div>
+{% endblock content %}
