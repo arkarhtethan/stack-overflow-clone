@@ -21,6 +21,7 @@ from . import url_config
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
+    path('qanda/', include('qanda.urls', namespace='qanda')),
 ]
 
 

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+Ask a question
+{% endblock title %}
+
+
+{% block content %}
+
+{{ request.path }}?next=/qanda/ask/
+
+<div class="container my-5">
+    <div class="col-md-12">
+
+        <div class="col-md-9 offset-md-1">
+            <h1>
+                Ask a question.
+            </h1>
+            <form action="" method="POST">
+                {% include 'snippets/form.html' with form=form %}
+                <input type="submit" value="Ask" class="btn btn-primary">
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

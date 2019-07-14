@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    Update answer
+{% endblock title %}
+
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h3>
+                Update Your answer
+            </h3>
+            <hr>
+            <form method="POST">
+                {% include 'snippets/form.html' with form=form %}
+                <input type="submit" class="btn btn-primary" value="Update">
+            </form>
+        </div>
+    </div>
+</div>
+    
+{% endblock content %}
+    

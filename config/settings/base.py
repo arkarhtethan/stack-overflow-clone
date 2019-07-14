@@ -123,6 +123,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/qanda/'
 
 LOGOUT_REDIRECT_URL = '/accounts/login/'

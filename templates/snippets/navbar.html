@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-secondary mb-3">
+        <div class="container">
+          <a class="navbar-brand" href="#">Guru</a>
+              <ul class="navbar-nav">
+                  <li class="nav-item">
+                      <a class="nav-link" href="{% url 'qanda:question-list' %}">Feeds</a>
+                  </li>
+
+                  <li class="nav-item">
+                      <a class="nav-link" href="{% url 'qanda:question-ask' %}">Ask</a>
+                  </li class="nav-item">
+                  <li class="nav-item">
+                      <a class="nav-link" href="{% url 'qanda:about' %}">About</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#">Contact</a>
+                  </li>
+
+                {% if request.user.is_authenticated %}
+
+                  <li class="nav-item">
+                      <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                  </li>
+                {% else %}
+
+                  <li class="nav-item">
+                      <a class="nav-link" href="{% url 'login' %}">Login</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="{% url 'register' %}">Register</a>
+                  </li>
+
+                {% endif %}
+                
+    
+              </ul>
+          </div>
+</nav>

@@ -30,13 +30,9 @@
 
     <title>
 
-
+        Guru | 
 
         {% block title %}
-
-
-
-        Reusable Component Creating app
 
 
 
@@ -88,18 +84,16 @@
 
 <body>
 
-
+    {% include 'snippets/navbar.html' %}
+    
 
     {% block content %}
-
-
-
 
 
     {% endblock content %}
 
 
-
+    {% include 'snippets/footer.html' %}
 
 
     <script src="{% static '/jquery/jquery.min.js' %}"></script>

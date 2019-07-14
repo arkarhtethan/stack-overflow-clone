@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+{{ object.title }}
+{% endblock title %}
+
+
+{% block content %}
+<div class="container">
+    <div>
+        <h3>
+            {{ object.title }} 
+        </h3>
+        {% if solved %}
+        <span class="small badge badge-success mb-2">Solved</span>
+        {% endif %}
+
+        <div class="small">
+            Asked by {{ object.user }} on {{ object.created_at}}
+        </div>
+        <hr>
+        <p>
+            {{ object.question }}
+        </p>
+    </div>
+
+    <hr>
+
+    <div>
+        <p>
+            Answers:
+        </p>
+        <div>
+            <ul class="list-unstyled">
+                
+                {% for answer in object.answer_set.all %}
+
+                <li class="mb-4">
+                    <div class="row">
+
+                        {% ifequal object.user request.user  %}
+
+                        <div class="col-md-1 mr-1 my-auto">
+
+                            {% if answer.accepted %}
+                            <div class="">
+                                <span class="badge badge-success">Accepted</span>
+                            </div>
+                            {% endif %}
+
+
+                            {% if answer.accepted and reject_form %}
+
+                            <div>
+                                <form action="{% url 'qanda:update-answer-acceptance' pk=answer.pk %}" method="POST">
+                                    {% csrf_token %}
+                                    {{ reject_form }}
+                                    <button class="btn btn-link text-danger">
+                                        <i class="fa fa-times">
+                                        </i> Reject
+                                    </button>
+                                </form>
+                            </div>
+
+                            {% else %}
+
+                            <div class="mb-4">
+                                <form action="{% url 'qanda:update-answer-acceptance' pk=answer.pk %}" method="POST">
+                                    {% csrf_token %}
+                                    {{ accept_form }}
+                                    <button class="btn btn-link text-success">
+                                        <i class="fa fa-check-circle">
+                                        </i> Accept
+                                    </button>
+                                </form>
+                            </div>
+                            {% endif %}
+                        </div>
+
+
+                        {% endifequal %}
+
+                        <div class="col-md-9 border px-4 pt-4 pb-2">
+                            <div>
+                                {{ answer|linebreaks }}
+
+                            </div>
+                            {% ifequal answer.user request.user  %}
+                            <div>
+                                <a href="{% url 'qanda:answer-update' pk=answer.pk question_pk=object.pk %}">
+                                    edit
+                                </a>
+                            </div>
+                            {% endifequal %}
+                            <div class="small text-muted mt-3">
+                                answered by {{ answer.user }}
+                            </div>
+                        </div>
+                    </div>
+
+                </li>
+                {% empty %}
+                No answers yet.
+                {% endfor %}
+
+            </ul>
+        </div>
+    </div>
+
+    <hr>
+
+    {% if request.user.is_authenticated %}
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Post your answer</h3>
+            <form method="POST" action="{% url 'qanda:answer-create' pk=object.pk %}">
+                {% include 'snippets/form.html' with form=answer_form %}
+                <input type="submit" value="Post Answer" class="btn btn-primary">
+            </form>
+        </div>
+    </div>
+    {% else %}
+    <a href="{% url 'login' %}?next={{ request.path }}">Login</a> To add answer
+    {% endif %}
+
+</div>
+{% endblock content %}

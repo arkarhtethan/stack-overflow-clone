@@ -1,4 +1,4 @@
-
+{% load crispy_forms_tags %}
 
 <form action="
 {% if action_url %}
@@ -10,7 +10,7 @@
     {% endif %}
         
     method="POST">
-    {{ form }}
+    {{ form|crispy }}
     {% csrf_token %}
     <input type="submit" class="btn btn-primary" value="{{btn_value}}">
 </form>
