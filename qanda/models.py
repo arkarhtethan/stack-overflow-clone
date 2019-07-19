@@ -51,10 +51,6 @@ class Answer(models.Model):
 
         ordering = ('-created_at', )
 
-    def can_edit(self, user):
-
-        return self.user is user
-
     def __str__(self):
 
         return self.answer
